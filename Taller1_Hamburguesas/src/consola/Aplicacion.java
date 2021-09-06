@@ -1,6 +1,11 @@
 package consola;
 
+import modelo.Restaurante;
+
 public class Aplicacion {
+	
+	//Atributos//
+	private Restaurante restaurante;
 	
 	
 	//Metodo main//

@@ -1,13 +1,11 @@
 package modelo;
 
-public class Combo {
+public class Combo implements Producto {
 	
 	//Atributos//
 	private double descuento;
 	
-	
 	private String nombreCombo;
-	
 	
 	
 	// Constructor //
@@ -25,20 +23,20 @@ public class Combo {
 	
 	public int getPrecio() {
 		
-		return 1;
-		
-	}
-	
-	public String generarTextoFactura() {
-		return "a";
-				
+		return 0;
 	}
 	
 	public String getNombre() {
 		
 		return "a";
-		
 	}
+	
+	public String generarTextoFactura() {
+		
+		return "a";	
+	}
+	
+
 	
 	
 	
