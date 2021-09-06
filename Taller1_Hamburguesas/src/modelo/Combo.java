@@ -1,11 +1,15 @@
 package modelo;
 
+import java.util.ArrayList;
+
 public class Combo implements Producto {
 	
 	//Atributos//
 	private double descuento;
 	
 	private String nombreCombo;
+	
+	private ArrayList<ProductoMenu> itemsCombo;
 	
 	
 	// Constructor //
@@ -21,14 +25,14 @@ public class Combo implements Producto {
 		
 	}
 	
-	public int getPrecio() {
-		
-		return 0;
-	}
-	
 	public String getNombre() {
 		
 		return "a";
+	}
+	
+	public int getPrecio() {
+		
+		return 0;
 	}
 	
 	public String generarTextoFactura() {

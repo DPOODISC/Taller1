@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 public class ProductoAjustado implements Producto{
 	
+	
+	// Atributos //
+	
 	private ArrayList<Ingrediente> agregados;
 	
 	private ArrayList<Ingrediente> eliminados;
@@ -11,14 +14,22 @@ public class ProductoAjustado implements Producto{
 	private ProductoMenu base;
 	
 	
-	public int getPrecio() {
+	// Constructor //
+	
+	public ProductoAjustado() {
 		
-		return 0;
 	}
+	
+	// Metodos //
 	
 	public String getNombre() {
 		
 		return "a";
+	}
+	
+	public int getPrecio() {
+		
+		return 0;
 	}
 	
 	public String generarTextoFactura() {

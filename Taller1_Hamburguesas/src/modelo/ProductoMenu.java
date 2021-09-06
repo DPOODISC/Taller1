@@ -2,19 +2,29 @@ package modelo;
 
 public class ProductoMenu implements Producto {
 	
+	// Atributos //
+	
 	private String nombre;
 	
 	private int precioBase;
 	
 	
-	public int getPrecio() {
+	// Constructor //
+	
+	public ProductoMenu() {
 		
-		return 0;
 	}
+	
+	// Metodos //
 	
 	public String getNombre() {
 		
 		return "a";
+	}
+	
+	public int getPrecio() {
+		
+		return 0;
 	}
 	
 	public String generarTextoFactura() {
