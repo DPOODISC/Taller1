@@ -77,7 +77,7 @@ public class Aplicacion {
 		{
 			try
 			{
-		        System.out.println("\nMenu de Opciones\n");
+		        System.out.println("\nMenu de Ordenes\n");
 		        System.out.println("1. Mostrar el menú de productos");
 		        System.out.println("2. Mostrar el menú de combos");
 		        System.out.println("3. Mostrar el menú de ingredientes");
