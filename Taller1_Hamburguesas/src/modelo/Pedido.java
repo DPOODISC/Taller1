@@ -22,8 +22,15 @@ public class Pedido{
 	// Constructor //
 	
 	public Pedido(String nombreCliente, String direccionCliente) {
+	
+		this.nombreCliente = nombreCliente;
+		this.direccionCliente = direccionCliente;
 		
-//		Producto combo1 = new Combo(null, 0);
+		
+		int numero = (int)(Math.random()*(1000000-100000+1)+100000);
+		idPedido = numero;
+		
+		itemsPedido = new ArrayList<Producto>();
 	}
 	
 	
@@ -31,11 +38,12 @@ public class Pedido{
 	
 	public int getIdPedido() {
 		
-		return 0;
+		return idPedido;
 	}
 	
 	public void agregarProducto(Producto nuevoItem) {
 		
+		itemsPedido.add(nuevoItem);
 	}
 	
 	private int getPrecioNetoPedido() {

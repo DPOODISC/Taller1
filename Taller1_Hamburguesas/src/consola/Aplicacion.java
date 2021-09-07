@@ -1,9 +1,12 @@
 package consola;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+import java.io.FileNotFoundException;
+import java.io.*;
 import modelo.Restaurante;
 
 public class Aplicacion {
@@ -16,6 +19,7 @@ public class Aplicacion {
 	
 	public static void main(String[] args) {
 		Aplicacion consola = new Aplicacion();
+		ejecutarCargaRestaurante();
 		consola.ejecutarAplicacion();
 	}
 	
@@ -32,14 +36,12 @@ public class Aplicacion {
 				if (seleccion == 1)
 					menu();
 				else if (seleccion == 2)
-					System.out.println("2");
-					//ejecutarAtletasPorAnio();
+					ejecutarIniciarPedido();
 				else if (seleccion == 3)
 					System.out.println("3");
-					//ejecutarMedallasEnRango();
+					//ejecutarAgregarElementoAPedido();
 				else if (seleccion == 4)
-					System.out.println("4");
-					//ejecutarPorcentajeMedallistas();
+					ejecutarCerrarYGuardarPedido();
 				else if (seleccion == 5)
 					System.out.println("5");
 					//ejecutarBusquedaAtleta();
@@ -60,6 +62,24 @@ public class Aplicacion {
 		}
 	}
 	
+	private void ejecutarCerrarYGuardarPedido() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void ejecutarIniciarPedido() {
+		
+		System.out.println("\n" + "Iniciando nuevo pedido" + "\n");
+
+		String nombreCliente = input("Por favor ingrese su nombre");
+		String direccionCliente = input("Por favor ingrese su dirección");
+		
+		Restaurante restaurante = new Restaurante();
+		
+		restaurante.iniciarPedido(nombreCliente, direccionCliente);
+		
+	}
+
 	public void menuOpciones() {
         System.out.println("\nMenu de Opciones\n");
         System.out.println("1. Mostrar el menú");
@@ -114,7 +134,7 @@ public class Aplicacion {
 	
 	
 	public void mostrarMenuPrincipal() {
-		
+
         System.out.println("\nMenu del Corral\n");
         System.out.println("1. Corral - 14000k");
         System.out.println("2. corral queso - 16000k");
@@ -184,6 +204,19 @@ public class Aplicacion {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static void ejecutarCargaRestaurante()
+	{
+	      File archivoMenu = null;
+	      File archivoIngredientes = null;
+	      File archivoCombos = null;
+	      
+	      archivoMenu = new File ("./data/menu.txt");
+	      archivoIngredientes = new File ("./data/ingredientes.txt");
+	      archivoCombos = new File ("./data/combos.txt");
+	      
+	      Restaurante.cargarInformacionRestaurante(archivoIngredientes, archivoMenu, archivoCombos);
 	}
 	
 }

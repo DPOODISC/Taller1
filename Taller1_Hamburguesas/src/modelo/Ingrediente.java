@@ -13,6 +13,8 @@ public class Ingrediente {
 	
 	public Ingrediente(String nombre, int costoAdicional) {
 		
+		this.nombre = nombre;
+		this.costoAdicional = costoAdicional;
 	}
 	
 	
@@ -20,12 +22,13 @@ public class Ingrediente {
 	
 	public String getNombre() {
 		
-		return "a";
+		return nombre;
 		
 	}
 	
 	public int getCostoAdicional() {
-		return 2;
+		
+		return costoAdicional;
 	}
 
 }

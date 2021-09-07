@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import modelo.ProductoMenu;
 
 public class Combo implements Producto {
 	
@@ -14,8 +15,11 @@ public class Combo implements Producto {
 	
 	// Constructor //
 	
-	public Combo(String nombre, double descuento) {
+	public Combo(String nombre, double descuento, ArrayList<ProductoMenu> itemsCombo) {
 		
+		this.nombreCombo = nombre;
+		this.descuento = descuento;
+		this.itemsCombo = itemsCombo;
 	}
 	
 	
@@ -27,7 +31,7 @@ public class Combo implements Producto {
 	
 	public String getNombre() {
 		
-		return "a";
+		return nombreCombo;
 	}
 	
 	public int getPrecio() {

@@ -11,7 +11,9 @@ public class ProductoMenu implements Producto {
 	
 	// Constructor //
 	
-	public ProductoMenu() {
+	public ProductoMenu(String nombre, int precioBase) {
+		this.nombre = nombre;
+		this.precioBase = precioBase;
 		
 	}
 	
@@ -19,12 +21,12 @@ public class ProductoMenu implements Producto {
 	
 	public String getNombre() {
 		
-		return "a";
+		return nombre;
 	}
 	
 	public int getPrecio() {
 		
-		return 0;
+		return precioBase;
 	}
 	
 	public String generarTextoFactura() {
