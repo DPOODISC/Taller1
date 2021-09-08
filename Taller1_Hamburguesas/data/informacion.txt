@@ -1,0 +1,15 @@
+CORRAL UNIANDES
+
+La información de su pedido es: 
+________________________________________________________
+
+Nombre del Cliente: Daniel Bernal
+Direccion del Cliente: Callle45
+Idenficacion: 568476
+________________________________________________________
+
+gaseosa	Costo Unidad: $5000k	Calorias: 200
+________________________________________________________
+
+Precio Total: $5000k
+Calorias Totales: 200
