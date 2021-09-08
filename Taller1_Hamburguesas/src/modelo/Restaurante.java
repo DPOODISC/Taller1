@@ -20,7 +20,7 @@ public class Restaurante {
 	
 	private ArrayList<Pedido> pedidos;
 	
-	private ArrayList<ProductoMenu> menuBase;
+	private ArrayList<Producto> menuBase;
 	
 	private ArrayList<Ingrediente> ingredientes;
 	
@@ -29,7 +29,7 @@ public class Restaurante {
 	
 	public Restaurante() {
 		
-		menuBase = new ArrayList<ProductoMenu>();
+		menuBase = new ArrayList<Producto>();
 		ingredientes = new ArrayList<Ingrediente>();
 		combos = new ArrayList<Combo>();
 		
@@ -38,13 +38,25 @@ public class Restaurante {
 	
 	// Metodos //
 	
-	public void iniciarPedido(String nombreCliente, String direccionCliente) {
+	public Pedido iniciarPedido(String nombreCliente, String direccionCliente) {
 		
 		pedidos = new ArrayList<Pedido>();
 		
 		Pedido pedido = new Pedido(nombreCliente, direccionCliente);
 		
 		pedidos.add(pedido);
+		
+		return pedido;
+	}
+	
+	public void pedidoEnCurso(int seleccion, String producto, Pedido pedido) {
+		
+		if (seleccion == 1)
+			pedido.agregarProducto(getProducto(producto));
+		
+		else if (seleccion == 2)
+			pedido.eliminarProducto(getProducto(producto));
+
 	}
 	
 	public void cerrarYGuardarPedido() {
@@ -67,33 +79,41 @@ public class Restaurante {
 		return curso;
 	}
 	
+	public Producto getProducto(String elemento) {
+		
+		Producto producto = null;
+
+		for (int i = menuBase.size() - 1; i >= 0 && producto == null; i--)
+		{
+			Producto product = menuBase.get(i);
+			if (product.getNombre().equals(elemento))
+			{
+				producto = product;
+			}
+		}
+		
+		return producto;
+	}
+	
 	public ArrayList<Producto> getMenuBase() {
-		File archivoMenu = null;
 		
-		archivoMenu = new File ("./data/menu.txt");
-		menuBase = cargarMenu(archivoMenu);
-		
-		return null;
+		return menuBase;
 	}
 	
 	public ArrayList<Ingrediente> getIngredientes() {
-		File archivoIngredientes = null;
-		
-		archivoIngredientes = new File ("./data/ingredientes.txt");
-		ingredientes = cargarIngredientes(archivoIngredientes);
 		
 		return ingredientes;
 	}
 	
 	public static void cargarInformacionRestaurante(File archivoIngredientes, File archivoMenu, File archivoCombos) {
 		
-		ArrayList<ProductoMenu> menuBase = cargarMenu(archivoMenu);
-		ArrayList<Ingrediente> ingredientes = cargarIngredientes(archivoIngredientes);
-		ArrayList<Combo> combos = cargarCombos(archivoCombos, menuBase);
+		ArrayList<Producto> menuBase = cargarMenu(archivoMenu);
+		cargarIngredientes(archivoIngredientes);
+		cargarCombos(archivoCombos, menuBase);
 	}
 	
 	
-	private static ArrayList<Ingrediente> cargarIngredientes(File archivoIngredientes){
+	private static void cargarIngredientes(File archivoIngredientes){
 		  ArrayList<Ingrediente> ingredientes = new ArrayList<>();
 	      FileReader fr = null;
 	      BufferedReader br = null;
@@ -130,11 +150,10 @@ public class Restaurante {
 	            e2.printStackTrace();
 	         }
 	      }
-	      return ingredientes;
 	}
 	
-	private static ArrayList<ProductoMenu> cargarMenu(File archivoMenu){
-		  ArrayList<ProductoMenu> menuBase = new ArrayList<>();
+	private static ArrayList<Producto> cargarMenu(File archivoMenu){
+		  ArrayList<Producto> menuBase = new ArrayList<>();
 	      FileReader fr = null;
 	      BufferedReader br = null;
 
@@ -150,7 +169,7 @@ public class Restaurante {
 	    		  String[] partes = linea.split(",");
 	    		  String nombre = partes[0];
 	    		  int precioBase = Integer.parseInt(partes[1]);
-	    		  ProductoMenu producto = new ProductoMenu(nombre, precioBase);
+	    		  Producto producto = new ProductoMenu(nombre, precioBase);
 	    		  menuBase.add(producto);
 	    		  linea = br.readLine();
 	    	 }
@@ -173,9 +192,9 @@ public class Restaurante {
 		return menuBase;
 	}
 	
-	private static ArrayList<Combo> cargarCombos(File archivoCombos, ArrayList<ProductoMenu> menuBase){
+	private static void cargarCombos(File archivoCombos, ArrayList<Producto> menuBase){
 		  ArrayList<Combo> combos = new ArrayList<>();
-		  ArrayList<ProductoMenu> itemsCombo = new ArrayList<>();
+		  ArrayList<Producto> itemsCombo = new ArrayList<>();
 	      FileReader fr = null;
 	      BufferedReader br = null;
 
@@ -195,9 +214,9 @@ public class Restaurante {
 	    		  String producto2 = partes[3];
 	    		  String producto3 = partes[4];
 	    		  
-	    		  ProductoMenu product1 = buscarProducto(producto1, menuBase);
-	    		  ProductoMenu product2 = buscarProducto(producto2, menuBase);
-	    		  ProductoMenu product3 = buscarProducto(producto3, menuBase);
+	    		  Producto product1 = buscarProducto(producto1, menuBase);
+	    		  Producto product2 = buscarProducto(producto2, menuBase);
+	    		  Producto product3 = buscarProducto(producto3, menuBase);
 	    		  
 	    		  itemsCombo.add(product1);
 	    		  itemsCombo.add(product2);
@@ -223,16 +242,15 @@ public class Restaurante {
 	            e2.printStackTrace();
 	         }
 	      }
-		return combos;
 	}
 
-	private static ProductoMenu buscarProducto(String nombreProducto, ArrayList<ProductoMenu> menuBase)
+	private static Producto buscarProducto(String nombreProducto, ArrayList<Producto> menuBase)
 	{
-		ProductoMenu producto = null;
+		Producto producto = null;
 
 		for (int i = menuBase.size() - 1; i >= 0 && producto == null; i--)
 		{
-		  ProductoMenu product = menuBase.get(i);
+		  Producto product = menuBase.get(i);
 			if (product.getNombre().equals(nombreProducto))
 			{
 				producto = product;

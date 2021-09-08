@@ -8,18 +8,20 @@ import java.io.InputStreamReader;
 import java.io.FileNotFoundException;
 import java.io.*;
 import modelo.Restaurante;
+import modelo.Pedido;
 
 public class Aplicacion {
 	
 	//Atributos//
-	private Restaurante restaurante;
+	private static Restaurante restaurante;
 	
 	
 	//Metodo main//
 	
 	public static void main(String[] args) {
 		Aplicacion consola = new Aplicacion();
-		ejecutarCargaRestaurante();
+		restaurante = new Restaurante();
+		consola.ejecutarCargaRestaurante();
 		consola.ejecutarAplicacion();
 	}
 	
@@ -74,13 +76,54 @@ public class Aplicacion {
 		String nombreCliente = input("Por favor ingrese su nombre");
 		String direccionCliente = input("Por favor ingrese su dirección");
 		
-		Restaurante restaurante = new Restaurante();
+		Pedido pedido = restaurante.iniciarPedido(nombreCliente, direccionCliente);
 		
-		restaurante.iniciarPedido(nombreCliente, direccionCliente);
+		ejecutarPedidoEnCurso(pedido);
+		
+
+	}
+
+	private void ejecutarPedidoEnCurso(Pedido pedido) {
+		int seleccion;
+		boolean continuar = true;
+		
+		while (continuar)
+		{
+			try
+			{
+				menuPedido();
+				seleccion = Integer.parseInt(input("Por favor seleccione una opción"));
+				if (seleccion < 3 && seleccion > 0) {
+					
+					String producto = input("Por favor diga un producto");
+					restaurante.pedidoEnCurso(seleccion, producto, pedido);
+				}
+				else if (seleccion == 3)
+				{
+					System.out.println("Volviendo al menu...");
+					continuar = false;
+				}
+				else
+				{
+					System.out.println("Por favor seleccione una opción válida.");
+				}
+			}
+			catch (NumberFormatException e)
+			{
+				System.out.println("Debe seleccionar uno de los números de las opciones.");
+			}
+		}
+	}
+
+	private void menuPedido() {
+        System.out.println("\nMenu de Ordenes\n");
+        System.out.println("1. Agregar producto");
+        System.out.println("2. Eliminar producto");
+        System.out.println("3. Volver al menu");
 		
 	}
 
-	public void menuOpciones() {
+	private void menuOpciones() {
         System.out.println("\nMenu de Opciones\n");
         System.out.println("1. Mostrar el menú");
         System.out.println("2. Iniciar un nuevo pedido");
@@ -133,7 +176,7 @@ public class Aplicacion {
 	
 	
 	
-	public void mostrarMenuPrincipal() {
+	private void mostrarMenuPrincipal() {
 
         System.out.println("\nMenu del Corral\n");
         System.out.println("1. Corral - 14000k");
@@ -160,7 +203,7 @@ public class Aplicacion {
         System.out.println("22. gaseosa - 5000k");
 	}
 	
-	public void mostrarMenuCombos() {
+	private void mostrarMenuCombos() {
 		
         System.out.println("\nMenu del Corral\n");
         System.out.println("1. Combo Corral - 14000k");
@@ -170,7 +213,7 @@ public class Aplicacion {
 
 	}
 	
-	public void mostrarMenuIngredientes() {
+	private void mostrarMenuIngredientes() {
 		
         System.out.println("\nMenu del Corral\n");
         System.out.println("1. Lechuga - 1000k");
@@ -206,7 +249,7 @@ public class Aplicacion {
 		return null;
 	}
 	
-	public static void ejecutarCargaRestaurante()
+	private void ejecutarCargaRestaurante()
 	{
 	      File archivoMenu = null;
 	      File archivoIngredientes = null;
@@ -216,7 +259,8 @@ public class Aplicacion {
 	      archivoIngredientes = new File ("./data/ingredientes.txt");
 	      archivoCombos = new File ("./data/combos.txt");
 	      
-	      Restaurante.cargarInformacionRestaurante(archivoIngredientes, archivoMenu, archivoCombos);
+	      restaurante.cargarInformacionRestaurante(archivoIngredientes, archivoMenu, archivoCombos);
+
 	}
 	
 }

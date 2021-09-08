@@ -46,6 +46,11 @@ public class Pedido{
 		itemsPedido.add(nuevoItem);
 	}
 	
+	public void eliminarProducto(Producto nuevoItem) {
+		
+		itemsPedido.remove(nuevoItem);
+	}
+	
 	private int getPrecioNetoPedido() {
 		
 		return 0;

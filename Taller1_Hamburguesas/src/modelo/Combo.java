@@ -10,12 +10,12 @@ public class Combo implements Producto {
 	
 	private String nombreCombo;
 	
-	private ArrayList<ProductoMenu> itemsCombo;
+	private ArrayList<Producto> itemsCombo;
 	
 	
 	// Constructor //
 	
-	public Combo(String nombre, double descuento, ArrayList<ProductoMenu> itemsCombo) {
+	public Combo(String nombre, double descuento, ArrayList<Producto> itemsCombo) {
 		
 		this.nombreCombo = nombre;
 		this.descuento = descuento;
