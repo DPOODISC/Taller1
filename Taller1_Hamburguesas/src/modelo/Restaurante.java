@@ -173,7 +173,8 @@ public class Restaurante {
 	    		  String[] partes = linea.split(";");
 	    		  String nombre = partes[0];
 	    		  int precioBase = Integer.parseInt(partes[1]);
-	    		  ProductoMenu producto = new ProductoMenu(nombre, precioBase);
+	    		  int calorias = Integer.parseInt(partes[2]);
+	    		  ProductoMenu producto = new ProductoMenu(nombre, precioBase, calorias);
 	    		  menuBase.add(producto);
 	    		  linea = br.readLine();
 	    	 }

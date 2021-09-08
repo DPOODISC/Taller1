@@ -1,0 +1,16 @@
+CORRAL UNIANDES
+
+La información de su pedido es: 
+________________________________________________________
+
+Nombre del Cliente: Daniel Bernal
+Direccion del Cliente: Calle 45
+Idenficacion: 399335
+________________________________________________________
+
+corral queso	Costo Unidad: $16000k	Calorias: 681
+gaseosa	Costo Unidad: $5000k	Calorias: 200
+________________________________________________________
+
+Precio Total: $21000k
+Calorias Totales: 881

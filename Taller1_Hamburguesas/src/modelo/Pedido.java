@@ -76,16 +76,30 @@ public class Pedido{
 			
 			FileWriter fichero = null;
 	        PrintWriter pw = null;
+	        int totalMoney = 0;
+	        int totalCalories = 0;
 	        try
 	        {
 	            fichero = new FileWriter("./data/recibo.txt");
 	            pw = new PrintWriter(fichero);
+	            
+				pw.println("CORRAL UNIANDES\n" );
+				pw.println("La Factura de su pedido es: ");
+				pw.println("________________________________________________________\n");
+				pw.println("Nombre del Cliente: " + nombreCliente);
+				pw.println("Direccion del Cliente: " + direccionCliente);
+				pw.println("Idenficacion: " + idPedido);
+				pw.println("________________________________________________________\n");
 
-        		for (int i = 0; i < itemsPedido.size(); i++)
-        		{
-        			pw.println(itemsPedido.get(i).getNombre());
-        			pw.println(idPedido);
-        		}
+	    		for (int i = 0; i < itemsPedido.size(); i++)
+	    		{
+	    			pw.println(itemsPedido.get(i).getNombre() + "\tCosto Unidad: $"+ itemsPedido.get(i).getPrecio() + "k" + "\tCalorias: "+ itemsPedido.get(i).getCalorias());
+	    			totalMoney = itemsPedido.get(i).getPrecio() + totalMoney;
+	    			totalCalories = itemsPedido.get(i).getCalorias() + totalCalories;
+	    		}
+	    		pw.println("________________________________________________________\n");
+	    		pw.println("Precio Total: $" + totalMoney + "k");
+	    		pw.println("Calorias Totales: " + totalCalories);
 
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -105,16 +119,30 @@ public class Pedido{
 		
 		FileWriter fichero = null;
         PrintWriter pw = null;
+        int totalMoney = 0;
+        int totalCalories = 0;
         try
         {
             fichero = new FileWriter("./data/informacion.txt");
             pw = new PrintWriter(fichero);
+            
+			pw.println("CORRAL UNIANDES\n" );
+			pw.println("La Información de su pedido es: ");
+			pw.println("________________________________________________________\n");
+			pw.println("Nombre del Cliente: " + nombreCliente);
+			pw.println("Direccion del Cliente: " + direccionCliente);
+			pw.println("Idenficacion: " + idPedido);
+			pw.println("________________________________________________________\n");
 
     		for (int i = 0; i < itemsPedido.size(); i++)
     		{
-    			pw.println(itemsPedido.get(i).getNombre());
-    			pw.println(idPedido);
+    			pw.println(itemsPedido.get(i).getNombre() + "\tCosto Unidad: $"+ itemsPedido.get(i).getPrecio() + "k" + "\tCalorias: "+ itemsPedido.get(i).getCalorias());
+    			totalMoney = itemsPedido.get(i).getPrecio() + totalMoney;
+    			totalCalories = itemsPedido.get(i).getCalorias() + totalCalories;
     		}
+    		pw.println("________________________________________________________\n");
+    		pw.println("Precio Total: $" + totalMoney + "k");
+    		pw.println("Calorias Totales: " + totalCalories);
 
         } catch (Exception e) {
             e.printStackTrace();
