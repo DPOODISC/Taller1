@@ -50,8 +50,7 @@ public class Aplicacion {
 					ejecutarCerrarYGuardarPedido(pedido);
 				}
 				else if (seleccion == 5)
-					System.out.println("5");
-					//ejecutarBusquedaAtleta();
+					ejecutarBusquedaPedido(pedido);
 				else if (seleccion == 6)
 				{
 					System.out.println("Saliendo de la aplicación ...");
@@ -68,6 +67,7 @@ public class Aplicacion {
 			}
 		}
 	}
+
 
 	private Pedido ejecutarIniciarPedido(Pedido pedido) {
 		
@@ -116,6 +116,16 @@ public class Aplicacion {
 	
 	private void ejecutarCerrarYGuardarPedido(Pedido pedido) {
 		restaurante.cerrarYGuardarPedido(pedido);
+		
+	}
+	
+	private void ejecutarBusquedaPedido(Pedido pedido) {
+		
+		int id = Integer.parseInt(input("Por favor digite el id de su orden"));
+		int idPedido = pedido.getIdPedido();
+		
+		if (id == idPedido)
+			pedido.generarInformacion();
 		
 	}
 

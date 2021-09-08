@@ -6,7 +6,7 @@ import modelo.ProductoMenu;
 public class Combo implements Producto {
 	
 	//Atributos//
-	private double descuento;
+	private String descuento;
 	
 	private String nombreCombo;
 	
@@ -15,7 +15,7 @@ public class Combo implements Producto {
 	
 	// Constructor //
 	
-	public Combo(String nombre, double descuento, ArrayList<ProductoMenu> itemsCombo) {
+	public Combo(String nombre, String descuento, ArrayList<ProductoMenu> itemsCombo) {
 		
 		this.nombreCombo = nombre;
 		this.descuento = descuento;

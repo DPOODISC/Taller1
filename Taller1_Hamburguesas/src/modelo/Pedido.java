@@ -72,7 +72,7 @@ public class Pedido{
 		return 0;
 	}
 	
-	public String generarTextoFactura() {
+	public void generarTextoFactura(){
 			
 			FileWriter fichero = null;
 	        PrintWriter pw = null;
@@ -84,6 +84,7 @@ public class Pedido{
         		for (int i = 0; i < itemsPedido.size(); i++)
         		{
         			pw.println(itemsPedido.get(i).getNombre());
+        			pw.println(idPedido);
         		}
 
 	        } catch (Exception e) {
@@ -98,12 +99,35 @@ public class Pedido{
 	              e2.printStackTrace();
 	           }
 	        }
-		
-		return null;
 	}
 	
-	public void guardarFactura(File archivo) {
+	public void generarInformacion(){
 		
-	}
+		FileWriter fichero = null;
+        PrintWriter pw = null;
+        try
+        {
+            fichero = new FileWriter("./data/informacion.txt");
+            pw = new PrintWriter(fichero);
+
+    		for (int i = 0; i < itemsPedido.size(); i++)
+    		{
+    			pw.println(itemsPedido.get(i).getNombre());
+    			pw.println(idPedido);
+    		}
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           try {
+           // Nuevamente aprovechamos el finally para 
+           // asegurarnos que se cierra el fichero.
+           if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
+}
 	
 }

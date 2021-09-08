@@ -213,7 +213,7 @@ public class Restaurante {
 	    	 {
 	    		  String[] partes = linea.split(";");
 	    		  String nombreCombo = partes[0];
-	    		  int descuento = Integer.parseInt(partes[1]);
+	    		  String descuento = partes[1];
 	    		  String producto1 = partes[2];
 	    		  String producto2 = partes[3];
 	    		  String producto3 = partes[4];
