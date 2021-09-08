@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.io.*;
 
 public class Pedido{
 	
@@ -16,7 +17,7 @@ public class Pedido{
 
 	private String direccionCliente;
 	
-	private ArrayList<Producto> itemsPedido;
+	private ArrayList<ProductoMenu> itemsPedido;
 	
 	
 	// Constructor //
@@ -30,7 +31,7 @@ public class Pedido{
 		int numero = (int)(Math.random()*(1000000-100000+1)+100000);
 		idPedido = numero;
 		
-		itemsPedido = new ArrayList<Producto>();
+		itemsPedido = new ArrayList<ProductoMenu>();
 	}
 	
 	
@@ -41,12 +42,17 @@ public class Pedido{
 		return idPedido;
 	}
 	
-	public void agregarProducto(Producto nuevoItem) {
+	public ArrayList<ProductoMenu> getItemsPedido() {
+		
+		return itemsPedido;
+	}
+	
+	public void agregarProducto(ProductoMenu nuevoItem) {
 		
 		itemsPedido.add(nuevoItem);
 	}
 	
-	public void eliminarProducto(Producto nuevoItem) {
+	public void eliminarProducto(ProductoMenu nuevoItem) {
 		
 		itemsPedido.remove(nuevoItem);
 	}
@@ -66,7 +72,32 @@ public class Pedido{
 		return 0;
 	}
 	
-	private String generarTextoFactura() {
+	public String generarTextoFactura() {
+			
+			FileWriter fichero = null;
+	        PrintWriter pw = null;
+	        try
+	        {
+	            fichero = new FileWriter("./data/recibo.txt");
+	            pw = new PrintWriter(fichero);
+
+        		for (int i = 0; i < itemsPedido.size(); i++)
+        		{
+        			pw.println(itemsPedido.get(i).getNombre());
+        		}
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	           try {
+	           // Nuevamente aprovechamos el finally para 
+	           // asegurarnos que se cierra el fichero.
+	           if (null != fichero)
+	              fichero.close();
+	           } catch (Exception e2) {
+	              e2.printStackTrace();
+	           }
+	        }
 		
 		return null;
 	}

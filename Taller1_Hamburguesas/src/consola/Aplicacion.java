@@ -5,10 +5,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.io.*;
 import modelo.Restaurante;
 import modelo.Pedido;
+import modelo.ProductoMenu;
 
 public class Aplicacion {
 	
@@ -19,15 +21,17 @@ public class Aplicacion {
 	//Metodo main//
 	
 	public static void main(String[] args) {
+		ArrayList<ProductoMenu> menuBase;
 		Aplicacion consola = new Aplicacion();
 		restaurante = new Restaurante();
-		consola.ejecutarCargaRestaurante();
-		consola.ejecutarAplicacion();
+		menuBase = consola.ejecutarCargaRestaurante();
+		consola.ejecutarAplicacion(menuBase);
 	}
 	
-	public void ejecutarAplicacion() {
+	public void ejecutarAplicacion(ArrayList<ProductoMenu> menuBase) {
 		int seleccion;
 		boolean continuar = true;
+		Pedido pedido = new Pedido(null, null);
 		
 		while (continuar)
 		{
@@ -38,12 +42,13 @@ public class Aplicacion {
 				if (seleccion == 1)
 					menu();
 				else if (seleccion == 2)
-					ejecutarIniciarPedido();
-				else if (seleccion == 3)
-					System.out.println("3");
-					//ejecutarAgregarElementoAPedido();
-				else if (seleccion == 4)
-					ejecutarCerrarYGuardarPedido();
+					pedido = ejecutarIniciarPedido(pedido);
+				else if (seleccion == 3) {
+					pedido = ejecutarPedidoEnCurso(pedido, menuBase);
+				}
+				else if (seleccion == 4) {
+					ejecutarCerrarYGuardarPedido(pedido);
+				}
 				else if (seleccion == 5)
 					System.out.println("5");
 					//ejecutarBusquedaAtleta();
@@ -63,27 +68,20 @@ public class Aplicacion {
 			}
 		}
 	}
-	
-	private void ejecutarCerrarYGuardarPedido() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	private void ejecutarIniciarPedido() {
+	private Pedido ejecutarIniciarPedido(Pedido pedido) {
 		
 		System.out.println("\n" + "Iniciando nuevo pedido" + "\n");
 
 		String nombreCliente = input("Por favor ingrese su nombre");
 		String direccionCliente = input("Por favor ingrese su dirección");
 		
-		Pedido pedido = restaurante.iniciarPedido(nombreCliente, direccionCliente);
+		pedido = restaurante.iniciarPedido(nombreCliente, direccionCliente);
 		
-		ejecutarPedidoEnCurso(pedido);
-		
-
+		return pedido;
 	}
 
-	private void ejecutarPedidoEnCurso(Pedido pedido) {
+	private Pedido ejecutarPedidoEnCurso(Pedido pedido, ArrayList<ProductoMenu> menuBase) {
 		int seleccion;
 		boolean continuar = true;
 		
@@ -96,7 +94,7 @@ public class Aplicacion {
 				if (seleccion < 3 && seleccion > 0) {
 					
 					String producto = input("Por favor diga un producto");
-					restaurante.pedidoEnCurso(seleccion, producto, pedido);
+					pedido = restaurante.pedidoEnCurso(seleccion, producto, pedido, menuBase);
 				}
 				else if (seleccion == 3)
 				{
@@ -113,6 +111,12 @@ public class Aplicacion {
 				System.out.println("Debe seleccionar uno de los números de las opciones.");
 			}
 		}
+		return pedido;
+	}
+	
+	private void ejecutarCerrarYGuardarPedido(Pedido pedido) {
+		restaurante.cerrarYGuardarPedido(pedido);
+		
 	}
 
 	private void menuPedido() {
@@ -249,8 +253,9 @@ public class Aplicacion {
 		return null;
 	}
 	
-	private void ejecutarCargaRestaurante()
+	private ArrayList<ProductoMenu> ejecutarCargaRestaurante()
 	{
+		ArrayList<ProductoMenu> menuBase = null;
 	      File archivoMenu = null;
 	      File archivoIngredientes = null;
 	      File archivoCombos = null;
@@ -259,7 +264,8 @@ public class Aplicacion {
 	      archivoIngredientes = new File ("./data/ingredientes.txt");
 	      archivoCombos = new File ("./data/combos.txt");
 	      
-	      restaurante.cargarInformacionRestaurante(archivoIngredientes, archivoMenu, archivoCombos);
+	      menuBase = Restaurante.cargarInformacionRestaurante(archivoIngredientes, archivoMenu, archivoCombos, menuBase);
+		return menuBase;
 
 	}
 	
